@@ -86,6 +86,14 @@ container_user_if_enabled() {
 }
 
 
+add_instance_host_if_ansible_job() {
+  if [ -d "${TOOLS_DIR}" ]; then
+    return
+  else
+    echo "instance:127.0.0.1"
+  fi
+}
+
 # shellcheck source=./library.sh
 source "${HERA_HOME}"/library.sh
 
@@ -105,7 +113,7 @@ readonly CONTAINER_COMMAND=${CONTAINER_COMMAND:-"${WORKSPACE}/hera/wait.sh"}
 run_ssh "podman run \
             --name "${CONTAINER_TO_RUN_NAME}" $(container_user_if_enabled) \
             --add-host=${CONTAINER_SERVER_HOSTNAME}:${CONTAINER_SERVER_IP}  \
-            --add-host=instance:127.0.0.1  \
+            --add-host=$(add_instance_host_if_ansible_job) \
             --rm $(add_parent_volume_if_provided) $(privileged_if_enabled) $(systemd_if_enabled) $(cgroup_mount_if_enabled) $(add_jenkins_jobs_volume_if_requested) \
             --workdir ${WORKSPACE} $(add_ports_if_provided) \
             -v "${JOB_DIR}":${WORKSPACE}:rw $(mount_tools_if_provided)\
