@@ -6,6 +6,7 @@ readonly BUILD_COMMAND=${BUILD_COMMAND}
 readonly PARENT_JOB_DIR=${PARENT_JOB_DIR:-'/parent_job/'}
 readonly HARMONIA_SCRIPT=${HARMONIA_SCRIPT}
 readonly BUILD_ID=${BUILD_ID}
+readonly BUILD_URL=${BUILD_URL}
 readonly JOB_NAME=${JOB_NAME}
 readonly PRINT_BUILD_ENV=${PRINT_BUILD_ENV:-'true'}
 readonly MAVEN_VERBOSE=${MAVEN_VERBOSE}

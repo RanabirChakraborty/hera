@@ -126,6 +126,7 @@ printJobConfig() {
   echo "JOB_NAME: ${JOB_NAME}"
   # shellcheck disable=SC2153
   echo "BUILD_ID: ${BUILD_ID}"
+  echo "BUILD_URL: ${BUILD_URL}"
   echo "SCRIPT_TYPE: ${SCRIPT_TYPE}"
   echo "HARMONIA_HOME: ${HARMONIA_HOME}"
   echo "JAVA_HOME: ${JAVA_HOME}"
