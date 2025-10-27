@@ -125,10 +125,11 @@ readonly CONTAINER_COMMAND=${CONTAINER_COMMAND:-"${WORKSPACE}/hera/wait.sh"}
 
 # shellcheck disable=SC2016
 run_ssh "podman run \
+            --replace \
             --name "${CONTAINER_TO_RUN_NAME}" $(container_user_if_enabled) $(add_podman_container_cpu_limit_if_provided) $(add_podman_container_memory_limit_if_provided) \
             --add-host=${CONTAINER_SERVER_HOSTNAME}:${CONTAINER_SERVER_IP}  \
             $(add_instance_host_if_ansible_job) \
-            --rm $(add_parent_volume_if_provided) $(privileged_if_enabled) $(systemd_if_enabled) $(cgroup_mount_if_enabled) $(add_jenkins_jobs_volume_if_requested) \
+            $(add_parent_volume_if_provided) $(privileged_if_enabled) $(systemd_if_enabled) $(cgroup_mount_if_enabled) $(add_jenkins_jobs_volume_if_requested) \
             --workdir ${WORKSPACE} $(add_ports_if_provided) \
             -v "${JOB_DIR}":${WORKSPACE}:rw $(mount_tools_if_provided)\
             -v "${JENKINS_ACCOUNT_DIR}/.ssh/":/var/jenkins_home/.ssh/:ro \

@@ -91,12 +91,19 @@ container_name() {
   local job_name
   local build_id
   local name_prefix
+  local instance_name_suffix
 
   job_name=${1// /}
   build_id=${2// /}
   name_prefix=${3:-${CONTAINER_NAME_PREFIX}}
 
-  echo "${name_prefix}-${job_name}-${build_id}"
+  if [ -n "${MOLECULE_INSTANCE_NAME:-""}" ]; then
+    instance_name_suffix="-${MOLECULE_INSTANCE_NAME}"
+  else
+    instance_name_suffix=""
+  fi
+
+  echo "${name_prefix}-${job_name}-${build_id}${instance_name_suffix}"
 }
 
 
